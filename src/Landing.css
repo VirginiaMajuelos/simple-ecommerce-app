@@ -1,0 +1,45 @@
+.countainer-routes {
+  background-color: #282c34;
+  min-height: 100vh;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.container-navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: cornflowerblue;
+  height: 60px;
+}
+
+.items {
+  color: white;
+  text-decoration: none;
+}
+
+.items:hover {
+  text-decoration: underline;
+}
+
+.container-product {
+  border: 1px solid white;
+  margin: 20px;
+  padding: 15px;
+}
+
+.container-button-cart {
+  display: flex;
+  flex-direction: row;
+}
+
+.button-comprar {
+  font-size: 0.8em;
+  padding: 10px;
+  margin: 10px;
+}
+
+.container-section {
+  margin: 20px;
+}

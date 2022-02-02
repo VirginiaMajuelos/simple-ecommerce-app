@@ -1,24 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useState, useEffect, createContext } from "react";
+import Landing from "./Components/Pages/Landing";
+import Products from "./Components/Pages/Products";
+import ProductDetails from "./Components/Pages/ProductDetails";
+import Cart from "./Components/Pages/Cart/Cart";
+import Navbar from "./Components/Layout/NavBar";
+
+export const AddProductToCart = React.createContext();
 
 function App() {
+  const [shoppingCart, setShoppingCart] = useState([]);
+  const [countCart, setCountCart] = useState(0);
+
+  const addProduct = (elm) => {
+    setShoppingCart([...shoppingCart, elm]);
+  };
+
+  const countItems = () => setCountCart(shoppingCart.length);
+
+  useEffect(() => {
+    countItems();
+  }, [shoppingCart]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <BrowserRouter>
+      <div className="countainer-routes">
+        <Navbar count={countCart} />
+        <AddProductToCart.Provider
+          value={{ addProduct, shoppingCart, setCountCart }}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/products/:id" element={<ProductDetails />} />
+            <Route path="cart" element={<Cart />} />
+          </Routes>
+        </AddProductToCart.Provider>
+      </div>
+    </BrowserRouter>
   );
 }
 
